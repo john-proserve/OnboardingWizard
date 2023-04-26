@@ -1,54 +1,51 @@
-require('dotenv').config();
-const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-const path = require('path');
-const User = require('./src/models/users');
-const port = process.env.PORT || 3000;
-mongoose.connect('mongodb://localhost/myapp', { useNewUrlParser: true, useUnifiedTopology: true }).then(() => console.log('Connected to MongoDB'));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-// Function to verify token
-function verifyToken(req, res, next) {
-    const bearerHeader = req.headers['authorization'];
-    if (typeof bearerHeader !== undefined) {
-        const bearerToken = bearerHeader.split(' ')[1];
-        req.token = bearerToken;
-        next();
+require('dotenv').config()
+const express = require('express')
+const app = express()
+const path = require('path')
+const { logger, logEvents } = require('./middleware/logger')
+const errorHandler = require('./middleware/errorHandler')
+const cookieParser = require('cookie-parser')
+const cors = require('cors')
+const corsOptions = require('./config/corsOptions')
+const connectDB = require('./config/dbConn')
+const mongoose = require('mongoose')
+const PORT = process.env.PORT || 3500
+
+console.log(process.env.NODE_ENV)
+
+connectDB()
+
+app.use(logger)
+
+app.use(cors(corsOptions))
+
+app.use(express.json())
+
+app.use(cookieParser())
+
+app.use('/', express.static(path.join(__dirname, 'public')))
+
+app.use('/', require('./routes/root'))
+
+app.all('*', (req, res) => {
+    res.status(404)
+    if (req.accepts('html')) {
+        res.sendFile(path.join(__dirname, 'views', '404.html'))
+    } else if (req.accepts('json')) {
+        res.json({ message: '404 Not Found' })
     } else {
-        res.sendStatus(403);
+        res.type('txt').send('404 Not Found')
     }
-}
-// Login endpoint
-app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    // Find user and password in database
-    User.findOne({ username, password }).then(user => {
-        if (user) {
-            const token = jwt.sign({ user }, 'secretKey');
-            res.json({ token });
-        } else {
-            res.sendStatus(401);
-        }
-    });
-});
+})
 
-// Protected endpoint
-app.get('/protected', verifyToken, (req, res) => {
-    jwt.verify(req.token, 'secretKey', (err, authData) => {
-        if (!err) {
-            res.json({ message: 'Protected data', authData })
-        } else {
-            res.sendStatus(403);
-        }
-    });
-});
+app.use(errorHandler)
 
-// Render Html File
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, 'templates/index.html'));
-});
+mongoose.connection.once('open', () => {
+    console.log('Connected to MongoDB')
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+})
 
-// Start server
-app.listen(port, () => console.log(`Server started on port ${port}`));
+mongoose.connection.on('error', err => {
+    console.log(err)
+    logEvents(`${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`, 'mongoErrLog.log')
+})
