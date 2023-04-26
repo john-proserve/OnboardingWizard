@@ -1,0 +1,1 @@
+export const Warehouse = () => <h1>Warehouse</h1>

@@ -1,0 +1,1 @@
+export const TaxIds = () => <h1>Tax IDs</h1>

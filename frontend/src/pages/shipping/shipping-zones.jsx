@@ -1,0 +1,1 @@
+export const ShippingZones = () => <h1>ShippingZones</h1>

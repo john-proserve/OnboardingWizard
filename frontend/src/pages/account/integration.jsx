@@ -1,0 +1,1 @@
+export const Integration = () => <h1>Integration</h1>

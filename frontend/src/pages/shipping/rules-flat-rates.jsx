@@ -1,0 +1,1 @@
+export const Rules = () => <h1>Rules/Flat Rates</h1>
