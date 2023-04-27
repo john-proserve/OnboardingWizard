@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
 
-const stepSchema = new mongoose.Schema({
-    user: {
+const stepStatusSchema = new mongoose.Schema({
+    user_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
     step_id: {
-        type: Number,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Steps',
         required: true
     },
     date_started: {
@@ -18,7 +19,12 @@ const stepSchema = new mongoose.Schema({
     date_completed: {
         type: Date,
         required: false
+    },
+    status_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Status',
+        required: true
     }
 });
 
-module.exports = mongoose.model('Steps', stepSchema);
+module.exports = mongoose.model('StepStatus', stepStatusSchema);
