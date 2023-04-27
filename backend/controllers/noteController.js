@@ -12,7 +12,7 @@ const getAllNotes = asyncHandler(async (req, res) => {
 
 // Get Note By ID
 const getNoteById = asyncHandler(async (req, res) => {
-    const { _id } = req.body;
+    const { _id } = req.params;
     if(!_id) {
         return res.status(400).json({ message: 'Note ID Required' });
     }
@@ -46,7 +46,11 @@ const createNewNote = asyncHandler(async (req, res) => {
 
 // Update Note
 const updateNote = asyncHandler(async (req, res) => {
-    const { _id, user, step_id, note_date, note, visibility } = req.body;
+    const { _id, user, step_id, note, visibility } = req.body;
+
+    if(!_id) {
+        return res.status(400).json({ message: 'Note ID Required' });
+    }
 
     const pastNote = await Note.findById(_id).exec();
 
@@ -58,15 +62,13 @@ const updateNote = asyncHandler(async (req, res) => {
         pastNote.user = user;
     if(step_id)
         pastNote.step_id = step_id;
-    if(note_date)
-        pastNote.note_date = note_date;
     if(note)
         pastNote.note = note;
     if(visibility)
         pastNote.visibility = visibility;
         
     const updatedNote = await pastNote.save();
-    res.json({message: `Note ${pastNote._id} updated.`});
+    res.json({message: `Note ${updatedNote._id} updated.`});
 });
 
 // Delete Note

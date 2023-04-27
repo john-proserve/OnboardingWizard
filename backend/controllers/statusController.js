@@ -12,7 +12,7 @@ const getAllStatus = asyncHandler(async (req, res) => {
 
 // Get Status By ID
 const getStatusById = asyncHandler(async (req, res) => {
-    const { _id } = req.body;
+    const { _id } = req.params;
     if(!_id) {
         return res.status(400).json({ message: 'Status ID Required' });
     }
