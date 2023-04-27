@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -10,9 +11,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    currentStep: {
+    current_step: {
         type: Number,
-        required: false
+        required: false,
+        default: 0
     },
     roles: [{
         type: String,

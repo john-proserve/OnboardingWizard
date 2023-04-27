@@ -25,6 +25,12 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.use('/', require('./routes/roots'))
 
+app.use('/users', require('./routes/userRoutes'));
+app.use('/notes', require('./routes/notesRoutes'));
+app.use('/steps', require('./routes/stepRoutes'));
+app.use('/stepStatus', require('./routes/stepStatusRoutes'));
+app.use('/status', require('./routes/statusRoutes'));
+
 app.all('*', (req, res) => {
     res.status(404)
     if (req.accepts('html')) {
