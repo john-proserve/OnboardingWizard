@@ -13,4 +13,4 @@ const Button = styled(Link)`
   border: 1px solid black;
 `;
 
-export const CompleteButton = ({ nextPage }) => <Button to={`/${nextPage}`}>Task Finished!</Button>;
+export const CompleteButton = ({ nextPage }) => <Button to={`${nextPage}`}>Task Finished!</Button>;

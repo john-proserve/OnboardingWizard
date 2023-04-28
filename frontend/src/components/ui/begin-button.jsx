@@ -13,4 +13,4 @@ const Button = styled(Link)`
   border: 1px solid black;
 `;
 
-export const BeginButton = ({ nextPage }) => <Button to={`/${nextPage}`}>Begin this section</Button>;
+export const BeginButton = ({ nextPage }) => <Button to={`${nextPage}`}>Begin this section</Button>;
