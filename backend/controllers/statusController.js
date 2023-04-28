@@ -12,15 +12,15 @@ const getAllStatus = asyncHandler(async (req, res) => {
 
 // Get Status By ID
 const getStatusById = asyncHandler(async (req, res) => {
-    const { _id } = req.params;
-    if(!_id) {
+    const { status_title } = req.params;
+    if(!status_title) {
         return res.status(400).json({ message: 'Status ID Required' });
     }
-    const status = await Status.findOne({ _id }).lean();
+    const status = await Status.findOne({ status_title }).lean();
     if(!status) {
         return res.status(400).json({ message: 'Status not found' });
     }
-    res.status(200).json({message: `ID: ${status._id} Status: ${status.status_title}`});
+    res.status(200).json({id: status._id, title: status.status_title, message: `ID: ${status._id} Status: ${status.status_title}`});
 });
 
 

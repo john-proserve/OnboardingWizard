@@ -13,4 +13,4 @@ const Button = styled(Link)`
   border: 1px solid black;
 `;
 
-export const IncompleteButton = ({ nextPage }) => <Button to={`${nextPage}`}>I'm stuck...</Button>;
+export const IncompleteButton = ({ nextPage }) => <Button to={`/checklist/${nextPage}`}>I'm stuck...</Button>;

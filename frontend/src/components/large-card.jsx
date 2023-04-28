@@ -28,11 +28,11 @@ const Description = styled.p`
   text-align: center;
 `;
 
-export const LargeCard = ({ title, description, nextPage, optional }) => (
+export const LargeCard = ({ title, description, nextPage, optional, step }) => (
   <Card>
     <Heading>{title}</Heading>
     <Description>{description}</Description>
-    <CompleteButton nextPage={nextPage} />
+    <CompleteButton nextPage={nextPage} step={step}/>
     <IncompleteButton nextPage={nextPage} />
     {optional && <OptionalButton />}
     <NoteField />
