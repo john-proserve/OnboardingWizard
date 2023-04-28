@@ -1,13 +1,17 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { CompleteButton } from './ui/complete-button';
+import { IncompleteButton } from './ui/incomplete-button';
+import { OptionalButton } from './ui/optional-button';
+import { NoteField } from './ui/note-field';
 
 const Card = styled.div`
   display: block;
   height: auto;
-  width: 60%;
+  width: 90%;
   border: 1px solid black;
   border-radius: 6px;
-  margin: 5px 0;
+  margin: 5px auto;
+  padding: 10px;
 `;
 
 const Heading = styled.h2`
@@ -24,18 +28,13 @@ const Description = styled.p`
   text-align: center;
 `;
 
-const Button = styled.button`
-  display: block;
-  width: 10%;
-  margin: 10px auto;
-`;
-
-export const LargeCard = ({ title, description, nextPage }) => (
+export const LargeCard = ({ title, description, nextPage, optional }) => (
   <Card>
     <Heading>{title}</Heading>
     <Description>{description}</Description>
-    <Button>
-      <Link to={`/${nextPage}`}>Next Step!</Link>
-    </Button>
+    <CompleteButton nextPage={nextPage} />
+    <IncompleteButton nextPage={nextPage} />
+    {optional && <OptionalButton />}
+    <NoteField />
   </Card>
 );

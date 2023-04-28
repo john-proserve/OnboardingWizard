@@ -1,4 +1,4 @@
-import { LargeCard } from '../components/large-card';
+import { SectionCard } from '../components/section-card';
 
 const accountInfo = {
   title: 'Account Info',
@@ -26,25 +26,9 @@ const shopify = {
 
 export const HomePage = () => (
   <>
-    <LargeCard
-      title={accountInfo.title}
-      description={accountInfo.description}
-      nextPage={accountInfo.nextPage}
-    />
-    <LargeCard
-      title={shipping.title}
-      description={shipping.description}
-      nextPage={shipping.nextPage}
-    />
-    <LargeCard
-      title={landedCost.title}
-      description={landedCost.description}
-      nextPage={landedCost.nextPage}
-    />
-    <LargeCard
-      title={shopify.title}
-      description={shopify.description}
-      nextPage={shopify.nextPage}
-    />
+    <SectionCard title={accountInfo.title} description={accountInfo.description} nextPage={accountInfo.nextPage} />
+    <SectionCard title={shipping.title} description={shipping.description} nextPage={shipping.nextPage} />
+    <SectionCard title={landedCost.title} description={landedCost.description} nextPage={landedCost.nextPage} />
+    <SectionCard title={shopify.title} description={shopify.description} nextPage={shopify.nextPage} />
   </>
 );
