@@ -6,5 +6,5 @@ const description =
 const nextPage = 'team';
 
 export const Buffers = () => (
-  <LargeCard title={title} description={description} nextPage={nextPage} />
+  <LargeCard title={title} description={description} nextPage={nextPage} optional />
 );

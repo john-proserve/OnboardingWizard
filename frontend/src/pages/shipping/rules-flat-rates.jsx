@@ -6,5 +6,5 @@ const description =
 const nextPage = 'landed-cost-settings';
 
 export const Rules = () => (
-  <LargeCard title={title} description={description} nextPage={nextPage} />
+  <LargeCard title={title} description={description} nextPage={nextPage} optional />
 );

@@ -18,32 +18,37 @@ const NavLink = styled(Link)`
   width: 100%;
 `;
 
+const HomeLink = styled(NavLink)`
+  height: 50px;
+`;
+
 export const Navbar = () => (
-  <NavList>
-    <NavLink to="/general">General</NavLink>
+  <>
+    <HomeLink to="/">Home</HomeLink>
+    <NavList>
+      <NavLink to="/general">General</NavLink>
 
-    <NavLink to="/billing">Billing</NavLink>
+      <NavLink to="/billing">Billing</NavLink>
 
-    <NavLink to="/integration">Integration</NavLink>
+      <NavLink to="/integration">Integration</NavLink>
 
-    <NavLink to="/carrier-account">Carrier Account</NavLink>
+      <NavLink to="/carrier-account">Carrier Account</NavLink>
 
-    <NavLink to="/warehouse">Warehouse</NavLink>
+      <NavLink to="/warehouse">Warehouse</NavLink>
 
-    <NavLink to="/shipping-zones">Shipping Zones</NavLink>
+      <NavLink to="/shipping-zones">Shipping Zones</NavLink>
 
-    <NavLink to="/rules-flat-rates">Rules</NavLink>
+      <NavLink to="/rules-flat-rates">Rules</NavLink>
 
-    <NavLink to="/landed-cost-settings">
-      Landed Cost Settings
-    </NavLink>
+      <NavLink to="/landed-cost-settings">Landed Cost Settings</NavLink>
 
-    <NavLink to="/tax-ids">Tax IDs</NavLink>
+      <NavLink to="/tax-ids">Tax IDs</NavLink>
 
-    <NavLink to="/buffers">Buffers</NavLink>
+      <NavLink to="/buffers">Buffers</NavLink>
 
-    <NavLink to="/team">Team</NavLink>
+      <NavLink to="/team">Team</NavLink>
 
-    <NavLink to="/app-enable">Enable App</NavLink>
-  </NavList>
+      <NavLink to="/app-enable">Enable App</NavLink>
+    </NavList>
+  </>
 );
