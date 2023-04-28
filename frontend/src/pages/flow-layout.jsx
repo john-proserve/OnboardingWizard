@@ -1,14 +1,10 @@
 import { Outlet } from 'react-router-dom';
 import { Navbar } from '../components/navbar';
-import styled from 'styled-components';
+import { Wrapper } from '../styles/global';
 
-const Wrapper = styled.div`
-  display: block;
-  margin: auto;
-  width: 60%;
-`;
 
-export const Layout = () => (
+
+export const FlowLayout = () => (
   <>
     <Navbar />
     <Wrapper>
