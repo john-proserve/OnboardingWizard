@@ -28,8 +28,8 @@ app.use('/', require('./routes/roots'))
 app.use('/users', require('./routes/userRoutes'));
 app.use('/notes', require('./routes/notesRoutes'));
 app.use('/steps', require('./routes/stepRoutes'));
-app.use('/stepStatus', require('./routes/stepStatusRoutes'));
 app.use('/status', require('./routes/statusRoutes'));
+app.use('/stepStatus', require('./routes/stepStatusRoutes'));
 
 app.all('*', (req, res) => {
     res.status(404)

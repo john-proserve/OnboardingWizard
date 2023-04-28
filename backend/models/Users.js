@@ -12,9 +12,10 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     current_step: {
-        type: Number,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Steps',
         required: false,
-        default: 0
+        default: "644ae258a8daec71c0db0ef9"
     },
     roles: [{
         type: String,

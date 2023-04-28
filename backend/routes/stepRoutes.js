@@ -8,7 +8,7 @@ router.route('/')
     .patch(stepController.updateStep)
     .delete(stepController.deleteStep);
 
-router.route('/:username')
+router.route('/:_id')
     .get(stepController.getStepById);
 
 

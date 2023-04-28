@@ -8,7 +8,7 @@ router.route('/')
     .patch(noteController.updateNote)
     .delete(noteController.deleteNote);
 
-router.route('/:username')
+router.route('/:_id')
     .get(noteController.getNoteById);
 
 

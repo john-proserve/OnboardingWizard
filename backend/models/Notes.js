@@ -12,11 +12,6 @@ const noteSchema = new mongoose.Schema({
         ref: 'Steps',
         required: true
     },
-    note_date: {
-        type: Date,
-        required: true,
-        default: Date.now
-    },
     note: {
         type: String,
         required: true

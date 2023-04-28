@@ -8,7 +8,7 @@ router.route('/')
     .patch(stepStatusController.updateStepStatus)
     .delete(stepStatusController.deleteStepStatus);
 
-router.route('/:username')
+router.route('/:_id')
     .get(stepStatusController.getStepStatusById);
 
 
