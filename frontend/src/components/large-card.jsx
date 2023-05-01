@@ -3,6 +3,7 @@ import { CompleteButton } from './ui/complete-button';
 import { IncompleteButton } from './ui/incomplete-button';
 import { OptionalButton } from './ui/optional-button';
 import { NoteField } from './ui/note-field';
+import { useState } from 'react';
 
 const Card = styled.div`
   display: block;
@@ -28,13 +29,16 @@ const Description = styled.p`
   text-align: center;
 `;
 
-export const LargeCard = ({ title, description, nextPage, optional }) => (
-  <Card>
-    <Heading>{title}</Heading>
-    <Description>{description}</Description>
-    <CompleteButton nextPage={nextPage} />
-    <IncompleteButton nextPage={nextPage} />
-    {optional && <OptionalButton />}
-    <NoteField />
-  </Card>
-);
+export const LargeCard = ({ title, description, nextPage, optional, step }) => {
+  const [optionalClicked, setOptionalClicked] = useState(false);
+  return (
+    <Card id="card">
+      <Heading>{title}</Heading>
+      <Description>{description}</Description>
+      <CompleteButton nextPage={nextPage} step={step} />
+      <IncompleteButton nextPage={nextPage} step={step} />
+      {optional && <OptionalButton step={step} setOptional={setOptionalClicked} />}
+      <NoteField step={step} nextPage={nextPage} optionalClicked={optionalClicked} />
+    </Card>
+  );
+};

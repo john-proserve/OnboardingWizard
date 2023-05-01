@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { doFetch } from '../../utils/doFetch';
+import { getStepStatus } from '../../utils/getStepStatus';
 
-const Button = styled(Link)`
+const Button = styled.button`
   display: block;
   margin: 10px auto;
   color: black;
@@ -13,4 +15,26 @@ const Button = styled(Link)`
   border: 1px solid black;
 `;
 
-export const CompleteButton = ({ nextPage }) => <Button to={`${nextPage}`}>Task Finished!</Button>;
+export const CompleteButton = ({ nextPage, step }) => {
+  const navigate = useNavigate();
+  const handleClick = async () => {
+    const [stepId, statusId] = await getStepStatus(step, 'Complete');
+    const body = {
+      user_id: sessionStorage.getItem('user'),
+      step_id: stepId,
+      status_id: statusId,
+    };
+    const res = await doFetch('/stepStatus', 'POST', body);
+    const resObj = await res.json();
+    switch (res.status) {
+      case 400:
+        alert(resObj.message);
+        break;
+      default:
+        navigate(`/checklist/${nextPage}`);
+        break;
+    }
+  };
+
+  return <Button onClick={handleClick}>Task Finished!</Button>;
+};

@@ -8,7 +8,7 @@ router.route('/')
     .patch(statusController.updateStatus)
     .delete(statusController.deleteStatus);
 
-router.route('/:_id')
+router.route('/:status_title')
     .get(statusController.getStatusById);
 
 

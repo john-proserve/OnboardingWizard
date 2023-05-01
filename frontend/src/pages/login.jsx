@@ -2,32 +2,40 @@ import styled from 'styled-components';
 import { UserCard } from '../components/ui/user-card';
 import { Button, ButtonLink } from '../styles/global';
 import { useFormInput } from '../hooks/use-form-input';
+import { doFetch } from '../utils/doFetch';
+import { useNavigate } from 'react-router-dom';
 
 const SubmitButton = styled(Button)``;
 
 const RegisterButton = styled(ButtonLink)``;
 
 export const Login = () => {
-  const formProps = { username: useFormInput(null), password: useFormInput(null) };
+  const navigate = useNavigate();
+  const formProps = { username: useFormInput(''), password: useFormInput('') };
 
   const handleLogin = async (username, password) => {
     if (!username || !password) {
       alert('Please enter an email and password.');
       return;
     }
-    const res = await fetch(`http://localhost:2023/users/${username}`, {
-      method: 'GET',
-      mode: 'cors',
-    });
-    console.log(res);
+
+    const path = `/users/${username}`;
+
+    const res = await doFetch(path);
     const resObject = await res.json();
-    if (res.status === 400) {
+
+    if (res.status === 400 && resObject.message === 'User not found') {
+      alert('Please register as a new user');
+      return;
+    } else if (res.status === 400) {
       alert(`There was an error: ${resObject.message}`);
+      return;
     }
+
     if (resObject.message.includes(username)) {
-      window.location.href = 'http://localhost:3000/checklist';
+      sessionStorage.setItem('user', resObject.id);
+      navigate('/checklist');
     }
-    console.log(resObject);
   };
 
   return (

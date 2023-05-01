@@ -24,31 +24,31 @@ const HomeLink = styled(NavLink)`
 
 export const Navbar = () => (
   <>
-    <HomeLink to="/">Home</HomeLink>
+    <HomeLink to="/checklist">Home</HomeLink>
     <NavList>
-      <NavLink to="/general">General</NavLink>
+      <NavLink to="/checklist/general">General</NavLink>
 
-      <NavLink to="/billing">Billing</NavLink>
+      <NavLink to="/checklist/billing">Billing</NavLink>
 
-      <NavLink to="/integration">Integration</NavLink>
+      <NavLink to="/checklist/integration">Integration</NavLink>
 
-      <NavLink to="/carrier-account">Carrier Account</NavLink>
+      <NavLink to="/checklist/carrier-account">Carrier Account</NavLink>
 
-      <NavLink to="/warehouse">Warehouse</NavLink>
+      <NavLink to="/checklist/warehouse">Warehouse</NavLink>
 
-      <NavLink to="/shipping-zones">Shipping Zones</NavLink>
+      <NavLink to="/checklist/shipping-zones">Shipping Zones</NavLink>
 
-      <NavLink to="/rules-flat-rates">Rules</NavLink>
+      <NavLink to="/checklist/rules-flat-rates">Rules</NavLink>
 
-      <NavLink to="/landed-cost-settings">Landed Cost Settings</NavLink>
+      <NavLink to="/checklist/landed-cost-settings">Landed Cost Settings</NavLink>
 
-      <NavLink to="/tax-ids">Tax IDs</NavLink>
+      <NavLink to="/checklist/tax-ids">Tax IDs</NavLink>
 
-      <NavLink to="/buffers">Buffers</NavLink>
+      <NavLink to="/checklist/buffers">Buffers</NavLink>
 
-      <NavLink to="/team">Team</NavLink>
+      <NavLink to="/checklist/team">Team</NavLink>
 
-      <NavLink to="/app-enable">Enable App</NavLink>
+      <NavLink to="/checklist/app-enable">Enable App</NavLink>
     </NavList>
   </>
 );
