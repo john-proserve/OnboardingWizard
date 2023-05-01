@@ -28,3 +28,7 @@ export const ButtonLink = styled(Link)`
   text-decoration: none;
   border: 1px solid black;
 `;
+
+export const Information = styled.div`
+  text-align: center;
+`;

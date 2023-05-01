@@ -29,12 +29,13 @@ const Description = styled.p`
   text-align: center;
 `;
 
-export const LargeCard = ({ title, description, nextPage, optional, step }) => {
+export const LargeCard = ({ title, description, nextPage, optional, step, children }) => {
   const [optionalClicked, setOptionalClicked] = useState(false);
   return (
     <Card id="card">
       <Heading>{title}</Heading>
       <Description>{description}</Description>
+      {children}
       <CompleteButton nextPage={nextPage} step={step} />
       <IncompleteButton nextPage={nextPage} step={step} />
       {optional && <OptionalButton step={step} setOptional={setOptionalClicked} />}
