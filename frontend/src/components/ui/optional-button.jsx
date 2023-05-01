@@ -20,11 +20,12 @@ const TextBoxDesc = styled.h4`
   text-align: center;
 `;
 
-export const OptionalButton = ({ nextPage }) => {
+export const OptionalButton = ({ setOptional }) => {
   const [notes, setNotes] = useState(false);
 
   const handleClick = e => {
     setNotes(true);
+    setOptional(true);
   };
 
   return (

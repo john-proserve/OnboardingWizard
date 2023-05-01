@@ -16,11 +16,20 @@ const steps = {
   13: 'ScheduleCall',
 };
 
-export const getStepStatus = async (step_name, status_name) => {
-  const stepRes = await doFetch(`/steps/${steps[step_name]}`, 'GET');
-  const stepObj = await stepRes.json();
-  const statusRes = await doFetch(`/status/${status_name}`, 'GET');
-  const statusObj = await statusRes.json();
+export const getStepStatus = async (step_name = null, status_name = null) => {
+  let stepRes, stepObj, statusRes, statusObj;
+  let result = [];
+  if (step_name) {
+    stepRes = await doFetch(`/steps/${steps[step_name]}`, 'GET');
+    stepObj = await stepRes.json();
+    result.push(stepObj.id);
+  }
 
-  return [stepObj.id, statusObj.id];
+  if (status_name) {
+    statusRes = await doFetch(`/status/${status_name}`, 'GET');
+    statusObj = await statusRes.json();
+    result.push(statusObj.id);
+  }
+
+  return result;
 };
