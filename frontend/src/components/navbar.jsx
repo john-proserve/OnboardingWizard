@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { StepsContext } from '../pages/flow-layout';
 
 const NavList = styled.nav`
   display: flex;
@@ -14,7 +16,18 @@ const NavLink = styled(Link)`
   font-size: 18px;
   text-decoration: none;
   color: black;
-  background-color: white;
+  background-color: ${props => {
+    switch (props.status) {
+      case 'Complete':
+        return 'lightgreen';
+      case 'On Hold':
+        return 'pink';
+      case 'Not Applicable':
+        return 'yellow';
+      default:
+        return 'white';
+    }
+  }};
   width: 100%;
 `;
 
@@ -22,33 +35,62 @@ const HomeLink = styled(NavLink)`
   height: 50px;
 `;
 
-export const Navbar = () => (
-  <>
-    <HomeLink to="/checklist">Home</HomeLink>
-    <NavList>
-      <NavLink to="/checklist/general">General</NavLink>
+export const Navbar = () => {
+  const { steps } = useContext(StepsContext);
+  console.log(steps);
 
-      <NavLink to="/checklist/billing">Billing</NavLink>
+  return (
+    <>
+      <HomeLink to="/checklist">Home</HomeLink>
+      <NavList>
+        <NavLink to="/checklist/general" status={steps['General']}>
+          General
+        </NavLink>
 
-      <NavLink to="/checklist/integration">Integration</NavLink>
+        <NavLink to="/checklist/billing" status={steps['Billing']}>
+          Billing
+        </NavLink>
 
-      <NavLink to="/checklist/carrier-account">Carrier Account</NavLink>
+        <NavLink to="/checklist/integration" status={steps['Integration']}>
+          Integration
+        </NavLink>
 
-      <NavLink to="/checklist/warehouse">Warehouse</NavLink>
+        <NavLink to="/checklist/carrier-account" status={steps['CarrierAccount']}>
+          Carrier Account
+        </NavLink>
 
-      <NavLink to="/checklist/shipping-zones">Shipping Zones</NavLink>
+        <NavLink to="/checklist/warehouse" status={steps['Warehouse']}>
+          Warehouse
+        </NavLink>
 
-      <NavLink to="/checklist/rules-flat-rates">Rules</NavLink>
+        <NavLink to="/checklist/shipping-zones" status={steps['ShippingZones']}>
+          Shipping Zones
+        </NavLink>
 
-      <NavLink to="/checklist/landed-cost-settings">Landed Cost Settings</NavLink>
+        <NavLink to="/checklist/rules-flat-rates" status={steps['Rules']}>
+          Rules
+        </NavLink>
 
-      <NavLink to="/checklist/tax-ids">Tax IDs</NavLink>
+        <NavLink to="/checklist/landed-cost-settings" status={steps['LandedCostSettings']}>
+          Landed Cost Settings
+        </NavLink>
 
-      <NavLink to="/checklist/buffers">Buffers</NavLink>
+        <NavLink to="/checklist/tax-ids" status={steps['TaxIds']}>
+          Tax IDs
+        </NavLink>
 
-      <NavLink to="/checklist/team">Team</NavLink>
+        <NavLink to="/checklist/buffers" status={steps['Buffers']}>
+          Buffers
+        </NavLink>
 
-      <NavLink to="/checklist/app-enable">Enable App</NavLink>
-    </NavList>
-  </>
-);
+        <NavLink to="/checklist/team" status={steps['Team']}>
+          Team
+        </NavLink>
+
+        <NavLink to="/checklist/app-enable" status={steps['EnableApp']}>
+          Enable App
+        </NavLink>
+      </NavList>
+    </>
+  );
+};

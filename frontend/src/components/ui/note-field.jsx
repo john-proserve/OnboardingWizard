@@ -3,6 +3,8 @@ import { getStepStatus } from '../../utils/getStepStatus';
 import { doFetch } from '../../utils/doFetch';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { StepsContext } from '../../pages/flow-layout';
 
 const TextBox = styled.textarea`
   display: block;
@@ -19,16 +21,17 @@ const Button = styled.button`
 export const NoteField = ({ nextPage, step, optionalClicked }) => {
   const [note, setNote] = useState('');
   const navigate = useNavigate();
+  const { steps, setSteps } = useContext(StepsContext);
 
   const handleChange = e => {
     setNote(e.target.value);
   };
 
   const handleClick = async () => {
-    const [stepId] = await getStepStatus(step);
-    console.log(sessionStorage.getItem('user'), stepId, note);
+    const [stepId, statusId] = await getStepStatus(step, 'Not Applicable');
+    const userId = sessionStorage.getItem('user');
     const body = {
-      user_id: sessionStorage.getItem('user'),
+      user_id: userId,
       step_id: stepId,
       note: note,
     };
@@ -40,6 +43,16 @@ export const NoteField = ({ nextPage, step, optionalClicked }) => {
     setNote('');
 
     if (optionalClicked) {
+      const statusBody = {
+        user_id: userId,
+        step_id: stepId,
+        status_id: statusId,
+        date_completed: Date.now(),
+      };
+      doFetch('/stepStatus', 'POST', statusBody);
+      let newSteps = steps;
+      newSteps[step] = 'Not Applicable';
+      setSteps(newSteps);
       navigate(`/checklist/${nextPage}`);
     }
   };
@@ -51,7 +64,9 @@ export const NoteField = ({ nextPage, step, optionalClicked }) => {
   return (
     <>
       <TextBox id="noteBox" rows={5} cols={50} onChange={handleChange}></TextBox>
-      <Button id="noteButton" onClick={handleClick}>Submit Notes</Button>
+      <Button id="noteButton" onClick={handleClick}>
+        Submit Notes
+      </Button>
     </>
   );
 };

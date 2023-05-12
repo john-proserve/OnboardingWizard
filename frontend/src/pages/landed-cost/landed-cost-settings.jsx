@@ -1,5 +1,5 @@
 import { LargeCard } from '../../components/large-card';
-import { useHome } from '../../hooks/use-home';
+import { Navbar } from '../../components/navbar';
 
 const title = 'Landed Cost Settings';
 const description =
@@ -7,6 +7,10 @@ const description =
 const nextPage = 'tax-ids';
 
 export const LandedCostSettings = () => {
-  useHome(false);
-  return <LargeCard title={title} description={description} nextPage={nextPage} step={8} />;
+  return (
+    <>
+      <Navbar />
+      <LargeCard title={title} description={description} nextPage={nextPage} step={'LandedCostSettings'} />
+    </>
+  );
 };

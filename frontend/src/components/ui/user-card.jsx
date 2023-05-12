@@ -11,10 +11,10 @@ export const StyledCard = styled.div`
 export const UserCard = ({ children, title, formProps }) => (
   <StyledCard>
     <h2>{title}</h2>
-    <label for="email">Email: </label>
+    <label>Email: </label>
     <input type="email" id="email" name="email" value={formProps.username.value} onChange={formProps.username.onChange} />
     <br />
-    <label for="password">Password: </label>
+    <label>Password: </label>
     <input type="password" id="password" name="password" value={formProps.password.value} onChange={formProps.password.onChange} />
     {children}
   </StyledCard>

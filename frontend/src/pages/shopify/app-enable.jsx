@@ -1,11 +1,15 @@
 import { LargeCard } from '../../components/large-card';
-import { useHome } from '../../hooks/use-home';
+import { Navbar } from '../../components/navbar';
 
 const title = 'Enable Shopify App';
 const description = '';
 const nextPage = '';
 
 export const AppEnable = () => {
-  useHome(false);
-  return <LargeCard title={title} description={description} nextPage={nextPage} step={12} />;
+  return (
+    <>
+      <Navbar />
+      <LargeCard title={title} description={description} nextPage={nextPage} step={'EnableApp'} />
+    </>
+  );
 };

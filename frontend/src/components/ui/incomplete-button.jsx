@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { doFetch } from '../../utils/doFetch';
 import { getStepStatus } from '../../utils/getStepStatus';
+import { useContext } from 'react';
+import { StepsContext } from '../../pages/flow-layout';
 
 const Button = styled.button`
   display: block;
@@ -16,6 +18,7 @@ const Button = styled.button`
 `;
 
 export const IncompleteButton = ({ nextPage, step }) => {
+  const { steps, setSteps } = useContext(StepsContext);
   const navigate = useNavigate();
   const handleClick = async () => {
     const [stepId, statusId] = await getStepStatus(step, 'On Hold');
@@ -31,8 +34,12 @@ export const IncompleteButton = ({ nextPage, step }) => {
         alert(resObj.message);
         break;
       default:
+        let newSteps = steps;
+        newSteps[step] = 'On Hold';
+        setSteps(newSteps);
         navigate(`/checklist/${nextPage}`);
         break;
     }
   };
-return <Button onClick={handleClick}>I'm stuck...</Button>;}
+  return <Button onClick={handleClick}>I'm stuck...</Button>;
+};

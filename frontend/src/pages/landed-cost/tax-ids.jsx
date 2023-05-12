@@ -1,5 +1,5 @@
 import { LargeCard } from '../../components/large-card';
-import { useHome } from '../../hooks/use-home';
+import { Navbar } from '../../components/navbar';
 
 const title = 'Tax IDs';
 const description =
@@ -7,6 +7,10 @@ const description =
 const nextPage = 'buffers';
 
 export const TaxIds = () => {
-  useHome(false);
-  return <LargeCard title={title} description={description} nextPage={nextPage} step={9} />;
+  return (
+    <>
+      <Navbar />
+      <LargeCard title={title} description={description} nextPage={nextPage} step={'TaxIds'} />
+    </>
+  );
 };

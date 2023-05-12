@@ -23,10 +23,10 @@ const Description = styled.p`
   text-align: center;
 `;
 
-export const SectionCard = ({ title, description, nextPage }) => (
+export const SectionCard = ({ title, description, nextPage, active }) => (
   <Card>
     <Heading>{title}</Heading>
     <Description>{description}</Description>
-    <BeginButton nextPage={nextPage} />
+    {active && <BeginButton nextPage={nextPage} />}
   </Card>
 );
